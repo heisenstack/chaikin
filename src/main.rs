@@ -1,15 +1,15 @@
 use macroquad::prelude::*;
-
+#[derive(Clone, Copy, Debug)]
 struct Point {
     x: f32,
     y: f32,
 }
 
-// impl Point {
-//     fn new(x: f32, y: f32) -> Self {
-//         Point{x, y}
-//     }
-// }
+impl Point {
+    fn new(x: f32, y: f32) -> Self {
+        Point{x, y}
+    }
+}
 fn window_conf() -> Conf {
     Conf {
         window_title: "Chaikin".to_string(),
@@ -23,12 +23,14 @@ fn window_conf() -> Conf {
 #[macroquad::main(window_conf)]
 
 async fn main() {
-    let mut click_position: Vec<(f32, f32)> = Vec::new();
+    let mut click_position: Vec<Point> = Vec::new();
+
     loop {
         if is_mouse_button_pressed(MouseButton::Left) {
             let (mouse_x, mouse_y) = mouse_position();
-            click_position.push((mouse_x, mouse_y));
-            println!("Mouse clicked at: ({}, {})", mouse_x, mouse_y);
+            let new_point = Point::new(mouse_x, mouse_y);
+            click_position.push(new_point.clone());
+            println!("Mouse clicked at: ({:?})", new_point);
         }
 
         clear_background(WHITE);
@@ -40,9 +42,9 @@ async fn main() {
             30.0,
             BLACK,
         );
-        for (x, y) in &click_position {
-            draw_circle(*x, *y, 8.0, BLUE);
-            draw_circle_lines(*x, *y, 8.0, 2.0,     DARKBLUE);
+        for point in &click_position {
+            draw_circle(point.x, point.y, 8.0, BLUE);
+            draw_circle_lines(point.x, point.y, 8.0, 2.0, DARKBLUE);
         }
 
         let (current_x, current_y) = mouse_position();
