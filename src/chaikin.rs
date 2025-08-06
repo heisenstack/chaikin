@@ -1,7 +1,7 @@
 use crate::point::Point;
 
 pub fn apply_chaikin_iterations(points: &[Point], iterations: usize) -> Vec<Point> {
-    let mut current_points = points.to_vec();
+    let mut current_points = points.to_vec(); // creates a copy of points
 
     for _step in 0..iterations {
         let mut chaikin_points = Vec::new();
