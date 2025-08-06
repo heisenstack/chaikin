@@ -49,8 +49,8 @@ pub fn draw_ui(points: &[Point], current_iteration: usize, is_animating: bool, w
 
 pub fn draw_points(points: &[Point]) {
     for point in points {
-        draw_circle(point.x, point.y, 8.0, BLUE);
-        draw_circle_lines(point.x, point.y, 8.0, 2.0, DARKBLUE);
+        draw_circle(point.x, point.y, 6.0, BLUE);
+        draw_circle_lines(point.x, point.y, 6.0, 2.0, DARKBLUE);
     }
 }
 
