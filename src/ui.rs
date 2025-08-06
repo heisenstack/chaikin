@@ -2,7 +2,7 @@ use crate::chaikin;
 use crate::point::Point;
 use macroquad::prelude::*;
 
-pub fn draw_ui(points: &[Point], current_iteration: usize, is_animating: bool) {
+pub fn draw_ui(points: &[Point], current_iteration: usize, is_animating: bool, warning: Option<String>) {
     draw_text("Click anywhere to place points!", 20.0, 20.0, 24.0, BLACK);
     draw_text("Press 'ENTER' to start animation", 20.0, 50.0, 20.0, GREEN);
     draw_text("Press 'C' to clear all points", 20.0, 560.0, 20.0, BLUE);
@@ -31,6 +31,10 @@ pub fn draw_ui(points: &[Point], current_iteration: usize, is_animating: bool) {
             20.0,
             DARKGRAY,
         );
+    }
+
+    if let Some(msg) = warning {
+        draw_text(&msg, 20.0, 140.0, 20.0, ORANGE);
     }
 
     let (current_x, current_y) = mouse_position();

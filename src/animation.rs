@@ -14,11 +14,7 @@ pub fn update_animation(
 
             if *current_iteration > 7 {
                 *current_iteration = 0;
-                println!("Animation...");
             }
-            // else {
-            //     println!("Steps: {current_iteration}");
-            // }
         }
     }
 }

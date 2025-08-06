@@ -13,19 +13,13 @@ pub fn apply_chaikin_iterations(points: &[Point], iterations: usize) -> Vec<Poin
             let p2 = current_points[i + 1];
 
             let q = Point::new(0.75 * p1.x + 0.25 * p2.x, 0.75 * p1.y + 0.25 * p2.y);
-
             let r = Point::new(0.25 * p1.x + 0.75 * p2.x, 0.25 * p1.y + 0.75 * p2.y);
             chaikin_points.push(q);
             chaikin_points.push(r);
-            // println!("Chaikin Points1: {:?}", chaikin_points);
         }
 
         chaikin_points.push(current_points[current_points.len() - 1]);
-
         current_points = chaikin_points;
-
-        // println!("Chaikin Points2: {:?}", chaikin_points);
     }
-
     current_points
 }

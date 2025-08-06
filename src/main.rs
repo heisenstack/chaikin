@@ -17,6 +17,7 @@ fn window_conf() -> Conf {
         ..Default::default()
     }
 }
+
 #[macroquad::main(window_conf)]
 async fn main() {
     let mut click_positions: Vec<Point> = Vec::new();
@@ -24,6 +25,7 @@ async fn main() {
     let mut is_animating = false;
     let mut last_step_time = 0.0;
     let step_duration = 1.0;
+    let mut warning: Option<String> = None;
 
     loop {
         input::handle_input(
@@ -31,6 +33,7 @@ async fn main() {
             &mut current_iteration,
             &mut is_animating,
             &mut last_step_time,
+            &mut warning, 
         );
 
         if input::should_quit() {
@@ -46,7 +49,7 @@ async fn main() {
 
         clear_background(WHITE);
 
-        ui::draw_ui(&click_positions, current_iteration, is_animating);
+        ui::draw_ui(&click_positions, current_iteration, is_animating, warning.clone());
         ui::draw_points(&click_positions);
         ui::draw_animation(&click_positions, current_iteration, is_animating);
 
